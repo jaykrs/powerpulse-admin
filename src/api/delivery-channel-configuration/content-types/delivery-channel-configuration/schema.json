@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "delivery_channel_configurations",
+  "info": {
+    "singularName": "delivery-channel-configuration",
+    "pluralName": "delivery-channel-configurations",
+    "displayName": "Delivery Channel Configuration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vendorId": {
+      "type": "string"
+    },
+    "vendor_name": {
+      "type": "string"
+    },
+    "delivery_channel_name": {
+      "type": "string"
+    },
+    "configuration": {
+      "type": "blocks"
+    },
+    "metadata": {
+      "type": "string"
+    }
+  }
+}

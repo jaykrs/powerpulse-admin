@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscription_prices",
+  "info": {
+    "singularName": "subscription-price",
+    "pluralName": "subscription-prices",
+    "displayName": "subscription_price"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "subscription_cost": {
+      "type": "integer"
+    },
+    "subscription_platform_cost": {
+      "type": "integer"
+    },
+    "tax": {
+      "type": "json"
+    },
+    "delivery_channel": {
+      "type": "string"
+    },
+    "delivery_channel_name": {
+      "type": "string"
+    },
+    "coupons": {
+      "type": "json"
+    }
+  }
+}

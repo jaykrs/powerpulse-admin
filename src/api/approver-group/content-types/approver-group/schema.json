@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "approver_groups",
+  "info": {
+    "singularName": "approver-group",
+    "pluralName": "approver-groups",
+    "displayName": "approver_group"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "approval_participant": {
+      "type": "json"
+    },
+    "participant_email": {
+      "type": "string"
+    },
+    "additional_data": {
+      "type": "json"
+    },
+    "metadata": {
+      "type": "string"
+    }
+  }
+}

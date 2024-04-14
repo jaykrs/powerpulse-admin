@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campaigns",
+  "info": {
+    "singularName": "campaign",
+    "pluralName": "campaigns",
+    "displayName": "campaign"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "campaign_name": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "campaign_brief": {
+      "type": "richtext"
+    },
+    "content_template": {
+      "type": "string"
+    },
+    "compaign_type": {
+      "type": "string"
+    },
+    "creator": {
+      "type": "email"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "profile_list": {
+      "type": "string"
+    }
+  }
+}

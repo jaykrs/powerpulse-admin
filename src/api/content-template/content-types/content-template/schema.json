@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "content_templates",
+  "info": {
+    "singularName": "content-template",
+    "pluralName": "content-templates",
+    "displayName": "content_template"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "delivery_channel": {
+      "type": "string"
+    },
+    "content_data_rte": {
+      "type": "blocks"
+    },
+    "content_data_mde": {
+      "type": "richtext"
+    },
+    "content_data": {
+      "type": "text"
+    },
+    "metadata": {
+      "type": "string"
+    },
+    "content_data_json": {
+      "type": "json"
+    }
+  }
+}

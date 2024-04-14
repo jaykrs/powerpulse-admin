@@ -590,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -695,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -724,6 +770,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    vendorId: Attribute.String;
+    avatar: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -741,46 +789,469 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiApproverGroupApproverGroup extends Schema.CollectionType {
+  collectionName: 'approver_groups';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
+    singularName: 'approver-group';
+    pluralName: 'approver-groups';
+    displayName: 'approver_group';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
+    name: Attribute.String;
+    vendorId: Attribute.String;
+    approval_participant: Attribute.JSON;
+    participant_email: Attribute.String;
+    additional_data: Attribute.JSON;
+    metadata: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::approver-group.approver-group',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::approver-group.approver-group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAssetAsset extends Schema.CollectionType {
+  collectionName: 'assets';
+  info: {
+    singularName: 'asset';
+    pluralName: 'assets';
+    displayName: 'asset';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    file_name: Attribute.String;
+    vendorId: Attribute.String;
+    file_path: Attribute.String;
+    metadata: Attribute.String;
+    file_data: Attribute.JSON;
+    file_path_mobile: Attribute.String;
+    file_path_tablet: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::asset.asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::asset.asset',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCampaignCampaign extends Schema.CollectionType {
+  collectionName: 'campaigns';
+  info: {
+    singularName: 'campaign';
+    pluralName: 'campaigns';
+    displayName: 'campaign';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    campaign_name: Attribute.String;
+    vendorId: Attribute.String;
+    campaign_brief: Attribute.RichText;
+    content_template: Attribute.String;
+    compaign_type: Attribute.String;
+    creator: Attribute.Email;
+    active: Attribute.Boolean;
+    start_date: Attribute.Date;
+    end_date: Attribute.Date;
+    profile_list: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::campaign.campaign',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::campaign.campaign',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContentTemplateContentTemplate
+  extends Schema.CollectionType {
+  collectionName: 'content_templates';
+  info: {
+    singularName: 'content-template';
+    pluralName: 'content-templates';
+    displayName: 'content_template';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    vendorId: Attribute.String;
+    active: Attribute.Boolean;
+    creator: Attribute.String;
+    delivery_channel: Attribute.String;
+    content_data_rte: Attribute.Blocks;
+    content_data_mde: Attribute.RichText;
+    content_data: Attribute.Text;
+    metadata: Attribute.String;
+    content_data_json: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::content-template.content-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::content-template.content-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDeliveryChannelConfigurationDeliveryChannelConfiguration
+  extends Schema.CollectionType {
+  collectionName: 'delivery_channel_configurations';
+  info: {
+    singularName: 'delivery-channel-configuration';
+    pluralName: 'delivery-channel-configurations';
+    displayName: 'Delivery Channel Configuration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    vendorId: Attribute.String;
+    vendor_name: Attribute.String;
+    delivery_channel_name: Attribute.String;
+    configuration: Attribute.Blocks;
+    metadata: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::delivery-channel-configuration.delivery-channel-configuration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::delivery-channel-configuration.delivery-channel-configuration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    ordername: Attribute.String;
+    vendorId: Attribute.String;
+    vendor_name: Attribute.String;
+    vendor_ip: Attribute.String;
+    order_date: Attribute.Date;
+    order_amount: Attribute.Integer;
+    tax: Attribute.JSON;
+    vendor_email: Attribute.Email;
+    payment_method: Attribute.Boolean;
+    payment_status: Attribute.Boolean;
+    payment_transaction: Attribute.String;
+    payment_order_id: Attribute.String;
+    product_list: Attribute.String;
+    payment_remarks: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProfileProfile extends Schema.CollectionType {
+  collectionName: 'profiles';
+  info: {
+    singularName: 'profile';
+    pluralName: 'profiles';
+    displayName: 'profile';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    email: Attribute.String;
+    phone: Attribute.String;
+    facebookid: Attribute.String;
+    whatsapp_number: Attribute.String;
+    vendorId: Attribute.String;
+    linkedin_id: Attribute.String;
+    dob: Attribute.Date;
+    anniversary_date: Attribute.Date;
+    profile_bio: Attribute.Blocks;
+    profile_conversation: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::profile.profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::profile.profile',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProfileListProfileList extends Schema.CollectionType {
+  collectionName: 'profile_lists';
+  info: {
+    singularName: 'profile-list';
+    pluralName: 'profile-lists';
+    displayName: 'profile_list';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    profile_list_name: Attribute.String;
+    vendorId: Attribute.String;
+    profile_list_data: Attribute.JSON;
+    metadata: Attribute.String;
+    active: Attribute.Boolean;
+    target_delivery_channel: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::profile-list.profile-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::profile-list.profile-list',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSchedulerScheduler extends Schema.CollectionType {
+  collectionName: 'schedulers';
+  info: {
+    singularName: 'scheduler';
+    pluralName: 'schedulers';
+    displayName: 'scheduler';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    vendorId: Attribute.String;
+    vendor_name: Attribute.String;
+    campaign: Attribute.String;
+    completion_status: Attribute.Boolean;
+    additional_data: Attribute.JSON;
+    schedule_time: Attribute.DateTime;
+    creator: Attribute.String;
+    status: Attribute.Boolean;
+    status_data: Attribute.Blocks;
+    approval_status: Attribute.Boolean;
+    approval_participant: Attribute.String;
+    approval_comment: Attribute.Text;
+    execution_date: Attribute.DateTime;
+    ready_for_action: Attribute.Boolean;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::scheduler.scheduler',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSubscriptionPriceSubscriptionPrice
+  extends Schema.CollectionType {
+  collectionName: 'subscription_prices';
+  info: {
+    singularName: 'subscription-price';
+    pluralName: 'subscription-prices';
+    displayName: 'subscription_price';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    subscription_cost: Attribute.Integer;
+    subscription_platform_cost: Attribute.Integer;
+    tax: Attribute.JSON;
+    delivery_channel: Attribute.String;
+    delivery_channel_name: Attribute.String;
+    coupons: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::subscription-price.subscription-price',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::subscription-price.subscription-price',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTemplateTemplate extends Schema.CollectionType {
+  collectionName: 'templates';
+  info: {
+    singularName: 'template';
+    pluralName: 'templates';
+    displayName: 'template';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    vendorId: Attribute.String;
+    active: Attribute.Boolean;
+    creator: Attribute.String;
+    metadata: Attribute.String;
+    content_data_json: Attribute.JSON;
+    content_data_rte: Attribute.Blocks;
+    content_data_mde: Attribute.RichText;
+    delivery_channel: Attribute.String;
+    referance_path: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::template.template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::template.template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVendorVendor extends Schema.CollectionType {
+  collectionName: 'vendors';
+  info: {
+    singularName: 'vendor';
+    pluralName: 'vendors';
+    displayName: 'vendor';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    vendor_name: Attribute.String;
+    vendorId: Attribute.String;
+    vendor_logo: Attribute.String;
+    active: Attribute.Boolean;
+    additional_data: Attribute.JSON;
+    contact_email: Attribute.Email;
+    contact_person_name: Attribute.String;
+    contact_person_phone: Attribute.String;
+    vendor_brief: Attribute.RichText;
+    vendor_city: Attribute.String;
+    metadata: Attribute.String;
+    vendor_user_limit: Attribute.Integer;
+    vendor_delivery_channel: Attribute.String;
+    vendor_subscription_validity: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::vendor.vendor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::vendor.vendor',
       'oneToOne',
       'admin::user'
     > &
@@ -802,10 +1273,22 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::approver-group.approver-group': ApiApproverGroupApproverGroup;
+      'api::asset.asset': ApiAssetAsset;
+      'api::campaign.campaign': ApiCampaignCampaign;
+      'api::content-template.content-template': ApiContentTemplateContentTemplate;
+      'api::delivery-channel-configuration.delivery-channel-configuration': ApiDeliveryChannelConfigurationDeliveryChannelConfiguration;
+      'api::order.order': ApiOrderOrder;
+      'api::profile.profile': ApiProfileProfile;
+      'api::profile-list.profile-list': ApiProfileListProfileList;
+      'api::scheduler.scheduler': ApiSchedulerScheduler;
+      'api::subscription-price.subscription-price': ApiSubscriptionPriceSubscriptionPrice;
+      'api::template.template': ApiTemplateTemplate;
+      'api::vendor.vendor': ApiVendorVendor;
     }
   }
 }

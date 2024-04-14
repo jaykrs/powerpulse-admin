@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vendors",
+  "info": {
+    "singularName": "vendor",
+    "pluralName": "vendors",
+    "displayName": "vendor",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vendor_name": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "vendor_logo": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "additional_data": {
+      "type": "json"
+    },
+    "contact_email": {
+      "type": "email"
+    },
+    "contact_person_name": {
+      "type": "string"
+    },
+    "contact_person_phone": {
+      "type": "string"
+    },
+    "vendor_brief": {
+      "type": "richtext"
+    },
+    "vendor_city": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "string"
+    },
+    "vendor_user_limit": {
+      "type": "integer"
+    },
+    "vendor_delivery_channel": {
+      "type": "string"
+    },
+    "vendor_subscription_validity": {
+      "type": "date"
+    }
+  }
+}

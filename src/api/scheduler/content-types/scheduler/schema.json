@@ -1,0 +1,61 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schedulers",
+  "info": {
+    "singularName": "scheduler",
+    "pluralName": "schedulers",
+    "displayName": "scheduler",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "vendorId": {
+      "type": "string"
+    },
+    "vendor_name": {
+      "type": "string"
+    },
+    "campaign": {
+      "type": "string"
+    },
+    "completion_status": {
+      "type": "boolean"
+    },
+    "additional_data": {
+      "type": "json"
+    },
+    "schedule_time": {
+      "type": "datetime"
+    },
+    "creator": {
+      "type": "string"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "status_data": {
+      "type": "blocks"
+    },
+    "approval_status": {
+      "type": "boolean"
+    },
+    "approval_participant": {
+      "type": "string"
+    },
+    "approval_comment": {
+      "type": "text"
+    },
+    "execution_date": {
+      "type": "datetime"
+    },
+    "ready_for_action": {
+      "type": "boolean"
+    }
+  }
+}
