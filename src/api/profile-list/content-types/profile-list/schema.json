@@ -29,6 +29,10 @@
     },
     "target_delivery_channel": {
       "type": "string"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

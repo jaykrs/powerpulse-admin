@@ -53,6 +53,10 @@
     },
     "vendor_subscription_validity": {
       "type": "date"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

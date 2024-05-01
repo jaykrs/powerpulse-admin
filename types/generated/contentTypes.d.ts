@@ -1024,6 +1024,7 @@ export interface ApiProfileProfile extends Schema.CollectionType {
     singularName: 'profile';
     pluralName: 'profiles';
     displayName: 'profile';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1040,6 +1041,7 @@ export interface ApiProfileProfile extends Schema.CollectionType {
     anniversary_date: Attribute.Date;
     profile_bio: Attribute.Blocks;
     profile_conversation: Attribute.JSON;
+    deleted: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1076,6 +1078,7 @@ export interface ApiProfileListProfileList extends Schema.CollectionType {
     metadata: Attribute.String;
     active: Attribute.Boolean;
     target_delivery_channel: Attribute.String;
+    deleted: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1241,6 +1244,7 @@ export interface ApiVendorVendor extends Schema.CollectionType {
     vendor_user_limit: Attribute.Integer;
     vendor_delivery_channel: Attribute.String;
     vendor_subscription_validity: Attribute.Date;
+    deleted: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

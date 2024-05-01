@@ -4,7 +4,8 @@
   "info": {
     "singularName": "profile",
     "pluralName": "profiles",
-    "displayName": "profile"
+    "displayName": "profile",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -43,6 +44,10 @@
     },
     "profile_conversation": {
       "type": "json"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
